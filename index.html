@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>American Families and Fathers United — Bookings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy: #2C3144; /* taken from the card's blue */
+      --deep-red: #89221E; /* stripe red */
+      --ivory: #F5F5F5;
+      --accent: #000000;
+      --max-width: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:var(--navy); background:var(--ivory);}
+
+    .page{max-width:var(--max-width); margin:28px auto; padding:18px;}
+
+    .header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logo-hero{width:120px;height:70px;background:#fff;border-radius:8px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+    .logo-hero img{width:100%;height:100%;object-fit:cover}
+
+    .org{line-height:1}
+    .org h1{margin:0;font-size:20px;color:var(--navy)}
+    .org p{margin:4px 0 0 0;color:#222;font-weight:600}
+    .contact{margin-left:auto;text-align:right}
+    .contact .role{font-weight:700}
+
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:22px}
+
+    /* Left card (hero + info) */
+    .left{background:linear-gradient(0deg, rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('./card.png') center/cover no-repeat; padding:22px;border-radius:12px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between}
+    .left h2{color:var(--navy);margin:0 0 8px 0}
+    .left p{margin:0 0 12px 0;color:#222}
+    .key-phones{display:flex;gap:12px;flex-wrap:wrap}
+    .chip{background:rgba(0,0,0,0.65);color:#fff;padding:8px 12px;border-radius:999px;font-weight:700}
+
+    /* Right (form + comments) */
+    .card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+    label{display:block;font-size:14px;margin-bottom:6px}
+    input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"], select, textarea{width:100%;padding:10px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px}
+    textarea{min-height:100px;resize:vertical}
+    .btn{display:inline-block;background:var(--deep-red);color:#fff;padding:10px 14px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
+    .btn.secondary{background:var(--navy)}
+
+    .list{margin-top:12px}
+    .list .item{border-bottom:1px dashed #eee;padding:8px 0}
+    .meta{font-size:13px;color:#666}
+
+    .comments{margin-top:12px}
+
+    footer{margin-top:18px;font-size:13px;color:#444}
+
+    /* responsive */
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .contact{text-align:left;margin-left:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="logo-hero"><img src="./card.png" alt="American Families and Fathers United card"></div>
+      <div class="org">
+        <h1>American Families and Fathers United ©</h1>
+        <p>Mr. Jeorge Lopez — COO</p>
+      </div>
+      <div class="contact">
+        <div class="role">Call / Text</div>
+        <div>917.520.2762</div>
+        <div>917.727.7293</div>
+        <div style="margin-top:6px; font-weight:600">AmericanFathersandFamiliesUnited@Gmail.com</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="left">
+        <div>
+          <h2>We help families connect with services</h2>
+          <p>Use this page to book an appointment, ask questions, or leave feedback. Appointments are shown in local time — you'll get a confirmation on-screen and saved in your browser (or sent to your server if you connect one).</p>
+          <div class="key-phones">
+            <div class="chip">Office: 917.520.2762</div>
+            <div class="chip">Alternate: 917.727.7293</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#222">
+          <strong>Colors used:</strong> navy, deep-red, ivory. Keep high contrast for accessibility.
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin-top:0">Book an appointment</h3>
+          <form id="bookingForm">
+            <label for="fullname">Full name</label>
+            <input id="fullname" type="text" required placeholder="Your full name">
+
+            <label for="email">Email</label>
+            <input id="email" type="email" required placeholder="you@example.com">
+
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" placeholder="(optional)">
+
+            <label for="service">Service requested</label>
+            <select id="service">
+              <option>Parent coordination</option>
+              <option>Mediation</option>
+              <option>Case intake / referral</option>
+              <option>General inquiry</option>
+            </select>
+
+            <label for="datetime">Date & time</label>
+            <input id="datetime" type="datetime-local" required>
+
+            <label for="note">Notes / Accessibility needs</label>
+            <textarea id="note" placeholder="Tell us about special needs, preferred meeting method, etc."></textarea>
+
+            <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+              <button class="btn" type="submit">Request appointment</button>
+              <button id="exportBtn" class="btn secondary" type="button">Export CSV</button>
+            </div>
+          </form>
+
+          <div class="list" id="bookingsList">
+            <h4 style="margin:8px 0 6px 0">Upcoming requests</h4>
+            <!-- bookings injected here -->
+          </div>
+
+          <hr style="margin:12px 0">
+
+          <div class="comments">
+            <h4 style="margin:6px 0">Comments and testimonials</h4>
+            <form id="commentForm">
+              <label for="cname">Name</label>
+              <input id="cname" type="text" placeholder="Your name">
+              <label for="cmessage">Message</label>
+              <textarea id="cmessage" placeholder="Share your experience or ask a quick question"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="btn" type="submit">Post</button>
+                <button id="clearComments" class="btn secondary" type="button">Clear all</button>
+              </div>
+            </form>
+
+            <div id="commentsList" style="margin-top:12px"></div>
+          </div>
+        </div>
+
+        <footer>
+          <div>Printable summary and export available. If you want this live on a server, replace localStorage calls with your API endpoint (examples below).</div>
+        </footer>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    // Simple client-only demo: bookings and comments saved in localStorage.
+    // Replace localStorage calls with fetch('/api/book') to post to your backend.
+
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingsList = document.getElementById('bookingsList');
+    const exportBtn = document.getElementById('exportBtn');
+
+    const commentForm = document.getElementById('commentForm');
+    const commentsList = document.getElementById('commentsList');
+    const clearComments = document.getElementById('clearComments');
+
+    function loadBookings(){
+      return JSON.parse(localStorage.getItem('afbu_bookings') || '[]');
+    }
+    function saveBookings(arr){
+      localStorage.setItem('afbu_bookings', JSON.stringify(arr));
+    }
+
+    function renderBookings(){
+      const items = loadBookings();
+      const container = document.createElement('div');
+      container.className = 'items';
+      if(items.length === 0){
+        bookingsList.innerHTML = '<div class="meta">No requests yet.</div>';
+        return;
+      }
+      bookingsList.innerHTML = '';
+      items.forEach((b, idx)=>{
+        const el = document.createElement('div');
+        el.className = 'item';
+        const when = new Date(b.datetime);
+        el.innerHTML = `<strong>${b.name}</strong> — <div class="meta">${b.service} • ${when.toLocaleString()}<br>${b.email} ${b.phone? ' • '+b.phone:''}</div>`;
+        const del = document.createElement('button');
+        del.textContent = 'Delete';
+        del.style.marginTop='6px';
+        del.className='btn secondary';
+        del.addEventListener('click', ()=>{
+          items.splice(idx,1);
+          saveBookings(items);
+          renderBookings();
+        });
+        el.appendChild(del);
+        bookingsList.appendChild(el);
+      });
+    }
+
+    bookingForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const service = document.getElementById('service').value;
+      const datetime = document.getElementById('datetime').value;
+      const note = document.getElementById('note').value.trim();
+
+      if(!name || !email || !datetime){
+        alert('Please fill name, email and date/time');
+        return;
+      }
+      const t = new Date(datetime);
+      if(isNaN(t.getTime())){ alert('Invalid date/time'); return; }
+      const now = new Date();
+      if(t < now){ if(!confirm('This date/time is in the past. Continue?')) return; }
+
+      const bookings = loadBookings();
+      const booking = { id: Date.now(), name, email, phone, service, datetime, note };
+      bookings.push(booking);
+      saveBookings(bookings);
+      renderBookings();
+
+      // demo: try posting to server (uncomment when you have an endpoint)
+      // fetch('/api/book', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(booking)})
+      //   .then(r=>r.json()).then(console.log).catch(()=>{});
+
+      bookingForm.reset();
+      alert('Appointment request saved locally. You can export or print it.');
+    });
+
+    exportBtn.addEventListener('click', ()=>{
+      const items = loadBookings();
+      if(items.length===0){ alert('No bookings to export'); return; }
+      const rows = [['Name','Email','Phone','Service','Datetime','Note']];
+      items.forEach(i=>rows.push([i.name,i.email,i.phone,i.service,i.datetime.replace('T',' '),i.note]));
+      const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'afbu-bookings.csv'; document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // comments
+    function loadComments(){return JSON.parse(localStorage.getItem('afbu_comments')||'[]')}
+    function saveComments(a){localStorage.setItem('afbu_comments', JSON.stringify(a))}
+    function renderComments(){
+      const items = loadComments();
+      commentsList.innerHTML = '';
+      if(items.length===0){ commentsList.innerHTML = '<div class="meta">No comments yet.</div>'; return; }
+      items.slice().reverse().forEach(c=>{
+        const el = document.createElement('div'); el.className='item';
+        el.innerHTML = `<strong>${escapeHtml(c.name||'Guest')}</strong><div class="meta">${new Date(c.posted).toLocaleString()}</div><div style="margin-top:6px">${escapeHtml(c.message)}</div>`;
+        commentsList.appendChild(el);
+      });
+    }
+
+    commentForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('cname').value.trim();
+      const message = document.getElementById('cmessage').value.trim();
+      if(!message){alert('Please enter a message'); return}
+      const arr = loadComments();
+      arr.push({ name, message, posted: Date.now() });
+      saveComments(arr);
+      commentForm.reset();
+      renderComments();
+    });
+
+    clearComments.addEventListener('click', ()=>{
+      if(confirm('Remove all comments from this browser?')){ localStorage.removeItem('afbu_comments'); renderComments(); }
+    });
+
+    function escapeHtml(s){ return String(s).replace(/[&<>\"']/g, function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]}) }
+
+    // init
+    renderBookings(); renderComments();
+  </script>
+</body>
+</html>
